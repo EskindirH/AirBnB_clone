@@ -47,4 +47,4 @@ class FileStorage:
         if os.path.exists(FileStorage.__file_path) is True:
             with open(FileStorage.__file_path, 'w') as f:
                 for k, v in json.load(f).items():
-                    self.new(dct[v['__class__']](**value))
+                    self.new(dct[v['__class__']](**v))
