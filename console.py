@@ -17,7 +17,7 @@ import json
 import shlex
 
 
-class class HBNBCommand(cmd.Cmd):
+class HBNBCommand(cmd.Cmd):
     """Command interpreter implementing Cmd class"""
     prompt = "(hbnb) "
     models = ['BaseModel', 'User', 'Amenity', 'Place', 'City', 'State', 'Review']
