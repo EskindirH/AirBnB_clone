@@ -12,7 +12,7 @@ from models.state import State
 from models.city import City
 from models.amenity import Amenity
 from models.place import Place
-from models.review import review
+from models.review import Review
 import json
 import shlex
 
@@ -20,7 +20,7 @@ import shlex
 class HBNBCommand(cmd.Cmd):
     """Command interpreter implementing Cmd class"""
     prompt = "(hbnb) "
-    models = ['BaseModel', 'User', 'Amenity', 'Place', 'City', 'State', 'Review']
+    mdls = ['BaseModel', 'User', 'Amenity', 'Place', 'City', 'State', 'Review']
     cmds = ['create', 'show', 'all', 'update', 'destroy', 'count']
 
     def precmd(self, arg):
@@ -29,7 +29,7 @@ class HBNBCommand(cmd.Cmd):
             cls = arg.split('.')
             cnd = cls[1].split('(')
             args = cnd[1].split(')')
-            if cls[0] in HBNBCommand.models and cnd[0] in HBNBCommand.cmds:
+            if cls[0] in HBNBCommand.mdls and cnd[0] in HBNBCommand.cmds:
                 arg = cnd[0] + ' ' + cls[0] + ' ' + args[0]
         return arg
 
@@ -56,7 +56,7 @@ class HBNBCommand(cmd.Cmd):
 
         if not model:
             print("** class name missing **")
-        elif model not in HBNBCommand.models:
+        elif model not in HBNBCommand.mdls:
             print("** class doesn't exist **")
         else:
             dct = {'BaseModel': BaseModel, 'User': User, 'Place': Place,
@@ -74,7 +74,7 @@ class HBNBCommand(cmd.Cmd):
             return
         
         args = arg.split(' ')
-        if args[0] not in HBNBCommand.models:
+        if args[0] not in HBNBCommand.mdls:
             print("** class doesn't exist **")
         elif len(args) == 1:
             print("** instance id missing **")
@@ -88,7 +88,7 @@ class HBNBCommand(cmd.Cmd):
                     return
             print("** no instance found **")
 
-   def do_destroy(self, arg):
+    def do_destroy(self, arg):
         """ Deletes an instance passed """
 
         if not arg:
@@ -97,7 +97,7 @@ class HBNBCommand(cmd.Cmd):
 
         args = arg.split(' ')
 
-        if args[0] not in HBNBCommand.models:
+        if args[0] not in HBNBCommand.mdls:
             print("** class doesn't exist **")
         elif len(args) == 1:
             print("** instance id missing **")
@@ -122,7 +122,7 @@ class HBNBCommand(cmd.Cmd):
 
         args = arg.split(' ')
 
-        if args[0] not in HBNBCommand.models:
+        if args[0] not in HBNBCommand.mdls:
             print("** class doesn't exist **")
         else:
             all_objs = storage.all()
@@ -146,7 +146,7 @@ class HBNBCommand(cmd.Cmd):
 
         args = shlex.split(a)
 
-        if args[0] not in HBNBCommand.models:
+        if args[0] not in HBNBCommand.mdls:
             print("** class doesn't exist **")
         elif len(args) == 1:
             print("** instance id missing **")
@@ -174,5 +174,5 @@ class HBNBCommand(cmd.Cmd):
         """EOF command to exit the interprater"""
         return True
 
-    if __name__ == "__main__":
-        HBNBCommand().cmdloop()
+if __name__ == '__main__':
+    HBNBCommand().cmdloop()

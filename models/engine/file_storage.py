@@ -25,7 +25,7 @@ class FileStorage:
         """Serializes objects"""
         dictionary = {}
 
-        for k, v FileStorage.__objects.items():
+        for k, v in FileStorage.__objects.items():
             dictionary[k] = v.to_dict()
 
         with open(FileStorage.__file_path, 'w') as f:
@@ -38,7 +38,8 @@ class FileStorage:
         from models.place import Place
         from models.amenity import Amenity
         from models.state import State
-        from models.review import review
+        from models.review import Review
+        from models.city import City
 
         dct = {'BaseModel': BaseModel, 'User': User, 'Place': Place,
                'City': City, 'Amenity': Amenity, 'State': State,
@@ -46,4 +47,4 @@ class FileStorage:
         if os.path.exists(FileStorage.__file_path) is True:
             with open(FileStorage.__file_path, 'w') as f:
                 for k, v in json.load(f).items():
-                    self.new(dct[v['__class__']](**value)
+                    self.new(dct[v['__class__']](**value))
