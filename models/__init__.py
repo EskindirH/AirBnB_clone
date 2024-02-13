@@ -1,6 +1,7 @@
 #!/usr/bin/python3
-"""
-Import FileStorage module
+""" 
+
+Import modules and packages
 
 """
 

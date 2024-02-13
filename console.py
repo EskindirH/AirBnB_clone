@@ -5,7 +5,6 @@ of the command interpreter.
 """
 
 import cmd
-from models import storage
 from models.base_model import BaseModel
 from models.user import User
 from models.state import State
@@ -13,18 +12,28 @@ from models.city import City
 from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
+from models import storage
 import json
 import shlex
 
 
 class HBNBCommand(cmd.Cmd):
-    """Command interpreter implementing Cmd class"""
+    """
+    Command interpreter implementing Cmd class.
+    """
     prompt = "(hbnb) "
     mdls = ['BaseModel', 'User', 'Amenity', 'Place', 'City', 'State', 'Review']
     cmds = ['create', 'show', 'all', 'update', 'destroy', 'count']
 
     def precmd(self, arg):
-        """Parses command input"""
+        """Parses command input
+
+        Args:
+            arg (str): input
+
+        Returns:
+            arg
+        """
         if "." in arg and '(' in arg and ')' in arg:
             cls = arg.split('.')
             cnd = cls[1].split('(')
@@ -34,7 +43,11 @@ class HBNBCommand(cmd.Cmd):
         return arg
 
     def help_help(self):
-        """Prints help command description"""
+        """Prints help command description
+
+        Returns:
+            no return
+        """
         print("Provides description of a given command")
 
     def empty_line(self):
@@ -42,7 +55,14 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     def do_count(self, cls_name):
-        """Count number of instances of a class"""
+        """Count number of instances of a class
+        
+        Args:
+            cls_name: class name
+
+        Returns:
+            void
+        """
         count = 0
         all_objs = storage.all()
         for k, v in all_objs.items():
@@ -52,7 +72,11 @@ class HBNBCommand(cmd.Cmd):
         print(count)
 
     def do_create(self, model):
-        """Creates instances of a class accordingly"""
+        """Creates instances of a class accordingly
+        
+        Args:
+            model: any model class
+        """
 
         if not model:
             print("** class name missing **")
@@ -67,7 +91,14 @@ class HBNBCommand(cmd.Cmd):
             mdl.save()
 
     def do_show(self, arg):
-        """Prints the string representation of an instance"""
+        """Prints the string representation of an instance
+
+        Args:
+            arg: string argument
+
+        Returns:
+            void
+        """
 
         if not arg:
             print("** class name missing **")
@@ -89,7 +120,11 @@ class HBNBCommand(cmd.Cmd):
             print("** no instance found **")
 
     def do_destroy(self, arg):
-        """ Deletes an instance passed """
+        """ Deletes an instance passed
+        
+        Args:
+            arg: string argument
+        """
 
         if not arg:
             print("** class name missing **")
@@ -114,7 +149,15 @@ class HBNBCommand(cmd.Cmd):
             print("** no instance found **")
 
     def do_all(self, arg):
-        """ Prints string represention of all instances of a given class """
+        """ Prints string represention of all 
+        instances of a given class
+
+        Args:
+            arg: string arg
+
+        Returns:
+            void
+        """
 
         if not arg:
             print("** class name missing **")
@@ -134,7 +177,12 @@ class HBNBCommand(cmd.Cmd):
             print(list_instances)
 
     def do_update(self, arg):
-        """ Updates an instance based on the class name and id """
+        """ Updates an instance based on 
+        the class name and id.
+
+        Args:
+            arg: string argument
+        """
 
         if not arg:
             print("** class name missing **")
@@ -167,11 +215,25 @@ class HBNBCommand(cmd.Cmd):
             print("** no instance found **")
 
     def do_quit(self, line):
-        """Exits the interprater"""
+        """Exits the interprater
+
+        Args:
+            line: command line
+
+        Returns:
+            True to exit
+        """
         return True
 
     def do_EOF(self, line):
-        """EOF command to exit the interprater"""
+        """EOF command to exit the interprater
+
+        Args:
+            line: command line
+
+        Returns:
+            True to exit
+        """
         return True
 
 if __name__ == '__main__':
