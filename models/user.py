@@ -1,9 +1,14 @@
 #!/usr/bin/python3
-"""
-This module contains User model class
+
 """
 
+This module contains User model class
+
+"""
+
+
 from models.base_model import BaseModel
+
 
 class User(BaseModel):
     """User model class"""

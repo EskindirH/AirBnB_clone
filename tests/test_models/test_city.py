@@ -6,7 +6,7 @@ This module contains unit test for cit.py
 """
 
 import unittest
-from models.city import City
+from Models.city import City
 import datetime
 
 
@@ -38,6 +38,7 @@ class TestCity(unittest.TestCase):
         self.assertIsInstance(self.c.id, str)
         self.assertIsInstance(self.c.created_at, datetime.datetime)
         self.assertIsInstance(self.c.updated_at, datetime.datetime)
+
 
 if __name__ == '__main__':
     unittest.main()

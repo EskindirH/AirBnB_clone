@@ -1,8 +1,11 @@
 #!/usr/bin/python3
+
 """
+
 Module contains city model
 
 """
+
 from models.base_model import BaseModel
 
 

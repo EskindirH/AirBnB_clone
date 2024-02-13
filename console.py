@@ -5,6 +5,7 @@ of the command interpreter.
 """
 
 import cmd
+from models import storage
 from models.base_model import BaseModel
 from models.user import User
 from models.state import State
@@ -12,7 +13,6 @@ from models.city import City
 from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
-from models import storage
 import json
 import shlex
 
@@ -56,7 +56,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_count(self, cls_name):
         """Count number of instances of a class
-        
+
         Args:
             cls_name: class name
 
@@ -73,7 +73,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, model):
         """Creates instances of a class accordingly
-        
+
         Args:
             model: any model class
         """
@@ -103,7 +103,7 @@ class HBNBCommand(cmd.Cmd):
         if not arg:
             print("** class name missing **")
             return
-        
+
         args = arg.split(' ')
         if args[0] not in HBNBCommand.mdls:
             print("** class doesn't exist **")
@@ -121,7 +121,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_destroy(self, arg):
         """ Deletes an instance passed
-        
+
         Args:
             arg: string argument
         """
@@ -149,7 +149,7 @@ class HBNBCommand(cmd.Cmd):
             print("** no instance found **")
 
     def do_all(self, arg):
-        """ Prints string represention of all 
+        """ Prints string represention of all
         instances of a given class
 
         Args:
@@ -177,7 +177,7 @@ class HBNBCommand(cmd.Cmd):
             print(list_instances)
 
     def do_update(self, arg):
-        """ Updates an instance based on 
+        """ Updates an instance based on
         the class name and id.
 
         Args:
@@ -235,6 +235,7 @@ class HBNBCommand(cmd.Cmd):
             True to exit
         """
         return True
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
