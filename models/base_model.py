@@ -33,8 +33,8 @@ class BaseModel:
             for key, value in kwargs.items():
                 if key == 'created_at' or key == 'updated_at':
                     value = datetime.strptime(kwargs[key], f)
-                    if key != '__class__':
-                        setattr(self, key, value)
+                if key != '__class__':
+                    setattr(self, key, value)
 
     def __str__(self):
         """Returns string representation
@@ -61,11 +61,14 @@ class BaseModel:
         """
         new_dict = {}
 
-        for key, value in self.__dict__.items():
-            if key == 'created_at' or key == 'updated_at':
-                new_dict[key] = value.strftime("%Y-%m-%dT%H:%M:%S.%f")
+        for key, values in self.__dict__.items():
+            if key == "created_at" or key == "updated_at":
+                new_dict[key] = values.strftime("%Y-%m-%dT%H:%M:%S.%f")
             else:
-                new_dict[key] = value
+                if not values:
+                    pass
+                else:
+                    new_dict[key] = values
         new_dict['__class__'] = self.__class__.__name__
 
         return new_dict

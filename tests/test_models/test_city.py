@@ -6,7 +6,7 @@ This module contains unit test for cit.py
 """
 
 import unittest
-from Models.city import City
+from models.city import City
 import datetime
 
 
